@@ -1,0 +1,17 @@
+[package]
+name = "xraytracer"
+version = "0.1.0"
+authors = ["Milan Gallo <gallo.milan.jr@gmail.com>"]
+license = "MIT OR Apache-2.0"
+edition = "2018"
+description = "A ray tracing engine written in rust"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.8.0"
+num-integer = "0.1.44"
+nalgebra = "0.25.4"
+nalgebra-glm = "0.11.0"
+lodepng = "3.4"
+clap = "2.33.3"
