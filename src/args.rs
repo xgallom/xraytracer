@@ -3,6 +3,7 @@ use std::fmt::Debug;
 use std::str::FromStr;
 
 pub struct Arguments {
+    pub(crate) render_preview: bool,
     pub(crate) width: u16,
     pub(crate) height: u16,
     pub(crate) fov: f32,
@@ -33,6 +34,7 @@ pub fn parse_arguments() -> Arguments {
         (version: crate_version!())
         (author: crate_authors!())
         (about: crate_description!())
+        (@arg render_preview: -rp --render-preview "Renders a diffuse preview")
         (@arg WIDTH: -w --width +takes_value "Sets the camera width")
         (@arg HEIGHT: -h --height +takes_value "Sets the camera height")
         (@arg FOV: --fov +takes_value "Sets the camera field of view in degrees")
@@ -47,6 +49,7 @@ pub fn parse_arguments() -> Arguments {
     .get_matches();
 
     Arguments {
+        render_preview: matches.is_present("render_preview"),
         width: parse_argument::<u16>(&matches, "WIDTH", "1920"),
         height: parse_argument::<u16>(&matches, "HEIGHT", "1080"),
         fov: parse_argument::<f32>(&matches, "FOV", "45"),

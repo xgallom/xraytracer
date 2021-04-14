@@ -97,9 +97,12 @@ fn nearest_from_intersect(
     }
 }
 
-pub fn intersect_triangles(camera: &Camera, triangles: &Triangles, ray: &Vec3) -> Option<Nearest> {
-    let normal_ray = &ray.normalize();
-
+pub fn intersect_triangles(
+    camera: &Camera,
+    triangles: &Triangles,
+    ray: &Vec3,
+    normal_ray: &Vec3,
+) -> Option<Nearest> {
     intersect_triangle(camera, triangles.vertices.as_slice(), normal_ray).map(|intersect| {
         nearest_from_intersect(camera, triangles.normals.as_slice(), intersect, normal_ray)
     })

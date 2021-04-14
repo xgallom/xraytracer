@@ -51,20 +51,22 @@ pub fn create_triangles() -> Triangles {
         })
     });
 
-    let mut vertices: Vec<Triangle> = Vec::with_capacity(12 * 4);
+    let mut vertices: Vec<Triangle> = Vec::with_capacity(12 * 4 * 4 * 4);
 
-    for n in 0..16 {
-        let mut cloned_vertices = vertices_data.clone();
-        cloned_vertices.iter_mut().for_each(|triangle| {
-            triangle.column_iter_mut().for_each(|mut vertex| {
-                let (h, w) = n.div_mod_floor(&4);
-                vertex.add_assign(&vec3(2f32 * w as f32, 2f32 * h as f32, 0f32));
-            });
-        });
+    for z in 0..4 {
+        for y in 0..4 {
+            for x in 0..4 {
+                let mut cloned_vertices = vertices_data.clone();
+                cloned_vertices.iter_mut().for_each(|triangle| {
+                    triangle.column_iter_mut().for_each(|mut vertex| {
+                        vertex.add_assign(&vec3(2f32 * x as f32, 2f32 * y as f32, 2f32 * z as f32));
+                    });
+                });
 
-        vertices.append(&mut cloned_vertices);
+                vertices.append(&mut cloned_vertices);
+            }
+        }
     }
-
     let normals: Vec<Triangle> = vertices
         .iter()
         .map(|triangle| {

@@ -8,6 +8,7 @@ extern crate rand;
 mod args;
 mod camera;
 mod intersect;
+mod material;
 mod output;
 mod radiance;
 mod rays;
